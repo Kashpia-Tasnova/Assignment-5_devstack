@@ -27,6 +27,12 @@ function TechnologySection() {
     });
   };
 
+  const handleRemoveFromStack = (technologyId: string) => {
+    setSelectedTechnologies((current) =>
+      current.filter((item) => item.id !== technologyId)
+    );
+  };
+
   return (
     <section
       id="technologies"
@@ -116,15 +122,18 @@ function TechnologySection() {
                   </div>
 
                   {/* Add to Stack Button */}
-                <button type="button" disabled={isAdded} onClick={() => handleAddToStack(technology)}
-                className={`mt-5 w-full rounded-md px-4 py-2.5 text-sm font-semibold transition ${
-                isAdded
-                ? "cursor-not-allowed bg-pink-50 text-[#e91e8f]"
-                : "bg-black text-white hover:bg-gray-800"
-                }`}
-                 >
-                {isAdded ? "✓ Added to Stack" : "Add to Stack"}
-                </button>
+                  <button
+                    type="button"
+                    disabled={isAdded}
+                    onClick={() => handleAddToStack(technology)}
+                    className={`mt-5 w-full rounded-md px-4 py-2.5 text-sm font-semibold transition ${
+                      isAdded
+                        ? "cursor-not-allowed bg-pink-50 text-[#e91e8f]"
+                        : "bg-black text-white hover:bg-gray-800"
+                    }`}
+                  >
+                    {isAdded ? "✓ Added to Stack" : "Add to Stack"}
+                  </button>
 
                 </div>
               );
@@ -133,6 +142,7 @@ function TechnologySection() {
 
           {/* Your Stack */}
           <aside className="h-fit rounded-xl border border-gray-100 bg-white p-5 shadow-sm">
+
             <h3 className="text-xl font-bold text-gray-800">
               Your Stack
             </h3>
@@ -157,11 +167,13 @@ function TechnologySection() {
             ) : (
               /* Selected Technologies */
               <div className="mt-6 space-y-3">
+
                 {selectedTechnologies.map((technology) => (
                   <div
                     key={technology.id}
                     className="flex items-center gap-3 rounded-lg border border-gray-100 bg-gray-50 p-3"
                   >
+
                     {/* Technology Icon */}
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-white">
                       <img
@@ -172,7 +184,7 @@ function TechnologySection() {
                     </div>
 
                     {/* Technology Information */}
-                    <div className="min-w-0">
+                    <div className="min-w-0 flex-1">
                       <p className="truncate text-sm font-semibold text-gray-800">
                         {technology.name}
                       </p>
@@ -181,10 +193,23 @@ function TechnologySection() {
                         {technology.category}
                       </p>
                     </div>
+
+                    {/* Remove Button */}
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveFromStack(technology.id)}
+                      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-gray-400 transition hover:bg-pink-50 hover:text-[#e91e8f]"
+                      aria-label={`Remove ${technology.name}`}
+                    >
+                      ×
+                    </button>
+
                   </div>
                 ))}
+
               </div>
             )}
+
           </aside>
 
         </div>
