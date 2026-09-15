@@ -33,6 +33,10 @@ function TechnologySection() {
     );
   };
 
+  const handleRemoveAll = () => {
+    setSelectedTechnologies([]);
+  };
+
   return (
     <section
       id="technologies"
@@ -67,7 +71,11 @@ function TechnologySection() {
               return (
                 <div
                   key={technology.id}
-                  className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+                  className={`rounded-xl border bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md ${
+                    isAdded
+                      ? "border-[#e91e8f]"
+                      : "border-gray-200"
+                  }`}
                 >
 
                   {/* Icon + Badge */}
@@ -141,76 +149,87 @@ function TechnologySection() {
           </div>
 
           {/* Your Stack */}
-          <aside className="h-fit rounded-xl border border-gray-100 bg-white p-5 shadow-sm">
+      
+<aside className="h-fit rounded-xl border border-gray-100 bg-white p-5 shadow-sm">
 
-            <h3 className="text-xl font-bold text-gray-800">
-              Your Stack
-            </h3>
+  {/* Stack Header */}
+  <h3 className="text-xl font-bold text-gray-800">
+    Your Stack
+  </h3>
 
-            <p className="mt-1 text-sm text-gray-500">
-              {selectedTechnologies.length === 0
-                ? "No Technologies Selected"
-                : `${selectedTechnologies.length} ${
-                    selectedTechnologies.length === 1
-                      ? "Technology"
-                      : "Technologies"
-                  } Selected`}
-            </p>
+  <p className="mt-1 text-sm text-gray-500">
+    {selectedTechnologies.length === 0
+      ? "No Technologies Selected"
+      : `${selectedTechnologies.length} ${
+          selectedTechnologies.length === 1
+            ? "Technology"
+            : "Technologies"
+        } Selected`}
+  </p>
 
-            {/* Empty Stack */}
-            {selectedTechnologies.length === 0 ? (
-              <div className="mt-8 rounded-lg bg-gray-50 px-5 py-10 text-center">
-                <p className="text-sm font-medium text-gray-500">
-                  Your stack is empty
-                </p>
-              </div>
-            ) : (
-              /* Selected Technologies */
-              <div className="mt-6 space-y-3">
+  {/* Empty Stack */}
+  {selectedTechnologies.length === 0 ? (
+    <div className="mt-8 rounded-lg bg-gray-50 px-5 py-10 text-center">
+      <p className="text-sm font-medium text-gray-500">
+        Your stack is empty
+      </p>
+    </div>
+  ) : (
+    <>
+      {/* Selected Technologies */}
+      <div className="mt-6 space-y-3">
+        {selectedTechnologies.map((technology) => (
+          <div
+            key={technology.id}
+            className="flex items-center gap-3 rounded-lg border border-gray-100 bg-gray-50 p-3"
+          >
+            {/* Technology Icon */}
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-white">
+              <img
+                src={technology.icon}
+                alt={technology.name}
+                className="h-6 w-6 object-contain"
+              />
+            </div>
 
-                {selectedTechnologies.map((technology) => (
-                  <div
-                    key={technology.id}
-                    className="flex items-center gap-3 rounded-lg border border-gray-100 bg-gray-50 p-3"
-                  >
+            {/* Technology Information */}
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-semibold text-gray-800">
+                {technology.name}
+              </p>
 
-                    {/* Technology Icon */}
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-white">
-                      <img
-                        src={technology.icon}
-                        alt={technology.name}
-                        className="h-6 w-6 object-contain"
-                      />
-                    </div>
+              <p className="text-xs text-gray-500">
+                {technology.category}
+              </p>
+            </div>
 
-                    {/* Technology Information */}
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-semibold text-gray-800">
-                        {technology.name}
-                      </p>
+            {/* Remove Button */}
+            <button
+              type="button"
+              onClick={() =>
+                handleRemoveFromStack(technology.id)
+              }
+              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-gray-400 transition hover:bg-pink-50 hover:text-[#e91e8f]"
+              aria-label={`Remove ${technology.name}`}
+            >
+              ×
+            </button>
+          </div>
+        ))}
+      </div>
 
-                      <p className="text-xs text-gray-500">
-                        {technology.category}
-                      </p>
-                    </div>
+      {/* Remove All Button */}
+      <button
+        type="button"
+        onClick={handleRemoveAll}
+        className="mt-5 w-full rounded-md border border-red-500 bg-white px-4 py-2.5 text-sm font-semibold text-red-500 transition hover:bg-red-50 active:bg-red-100"
+      >
+        Remove All
+      </button>
+    </>
+  )}
 
-                    {/* Remove Button */}
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveFromStack(technology.id)}
-                      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-gray-400 transition hover:bg-pink-50 hover:text-[#e91e8f]"
-                      aria-label={`Remove ${technology.name}`}
-                    >
-                      ×
-                    </button>
-
-                  </div>
-                ))}
-
-              </div>
-            )}
-
-          </aside>
+</aside>
 
         </div>
       </div>
