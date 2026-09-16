@@ -79,6 +79,37 @@ function TechnologySection() {
     setSelectedTechnologies([]);
     toast.info("All technologies removed from your stack!");
   };
+  const getBadgeColor = (badge: string) => {
+  switch (badge) {
+    case "Popular":
+      return "bg-cyan-50 text-cyan-600";
+
+    case "Versatile":
+    case "Modern":
+    case "Standard":
+      return "bg-green-50 text-green-600";
+
+    case "Fast":
+      return "bg-orange-50 text-orange-600";
+
+    case "Top SQL":
+      return "bg-blue-50 text-blue-600";
+
+    case "Cache":
+      return "bg-red-50 text-red-600";
+
+    case "Ubiquitous":
+      return "bg-yellow-50 text-yellow-600";
+
+    case "Essential":
+    case "Robust":
+    case "Containers":
+      return "bg-cyan-50 text-cyan-600";
+
+    default:
+      return "bg-gray-50 text-gray-600";
+  }
+};
 
   return (
     <>
@@ -151,9 +182,15 @@ function TechnologySection() {
                           />
                         </div>
 
-                        <span className="rounded-full bg-pink-50 px-3 py-1 text-xs font-medium text-[#e91e8f]">
-                          {technology.badge}
-                        </span>
+                        {technology.badge && (
+  <span
+    className={`rounded-full px-3 py-1 text-xs font-medium ${getBadgeColor(
+      technology.badge
+    )}`}
+  >
+    {technology.badge}
+  </span>
+)}
                       </div>
 
                       {/* Technology Name */}
