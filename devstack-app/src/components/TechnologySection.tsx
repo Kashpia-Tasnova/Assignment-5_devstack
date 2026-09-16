@@ -123,18 +123,13 @@ function TechnologySection() {
         draggable
       />
 
-      <section
-        id="technologies"
-        className="bg-white px-5 py-16 lg:px-0"
-      >
+      <section id="technologies" className="bg-white px-5 py-16 lg:px-0" >
         <div className="mx-auto max-w-[1200px]">
           {/* Section Heading */}
           <div className="mb-10 text-left">
             <h2 className="text-3xl font-bold text-[#111827] sm:text-4xl">
               Explore the{" "}
-              <span className="text-[#e91e8f]">
-                Technologies
-              </span>
+              <span className="text-[#e91e8f]"> Technologies </span>
             </h2>
 
             <p className="mt-3 max-w-[600px] text-sm leading-6 text-gray-500 sm:text-base">
@@ -143,7 +138,7 @@ function TechnologySection() {
             </p>
           </div>
 
-          {/* Technologies + Your Stack */}
+          {/* Technologies & My Stack */}
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_300px]">
             {/* Technology Cards */}
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -182,16 +177,16 @@ function TechnologySection() {
                           />
                         </div>
 
-                        {technology.badge && (
-  <span
-    className={`rounded-full px-3 py-1 text-xs font-medium ${getBadgeColor(
-      technology.badge
-    )}`}
-  >
-    {technology.badge}
-  </span>
-)}
-                      </div>
+              {technology.badge && (
+                 <span
+                  className={`rounded-full px-3 py-1 text-xs font-medium ${getBadgeColor(
+                     technology.badge
+                   )}`}
+                  >
+               {technology.badge}
+                  </span>
+                   )}
+                 </div>
 
                       {/* Technology Name */}
                       <h3 className="mt-4 text-lg font-bold text-[#111827]">
@@ -257,7 +252,7 @@ function TechnologySection() {
               )}
             </div>
 
-            {/* Your Stack */}
+            {/* Stack */}
             <aside className="h-fit rounded-xl border border-gray-100 bg-white p-5 shadow-sm">
               <h3 className="text-xl font-bold text-gray-800">
                 Your Stack
